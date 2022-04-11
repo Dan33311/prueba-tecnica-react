@@ -1,3 +1,8 @@
+import { useState } from "react";
+import DatePicker from "react-datepicker"
+
+import "react-datepicker/dist/react-datepicker.css"
+
 /*
 - Vista 1: Formulario solicitando la siguiente información
 a. Nombre completo {fullName}
@@ -12,29 +17,63 @@ librería de terceros, no el calendario nativo de HTML5
 
 const Form = () => {
   
+  const actualDate = new Date()
+  const [travelDate, setTravelDate] = useState()
+  const [countryName, setCountryName] = useState("default")
+  const [fullName, setFullName] = useState("")
+
+  const handleChangeValue = (event) => {
+    setCountryName(event.target.value)
+  }
+  const handleEditInputChange = (event) => {
+    setFullName(event.target.value)
+  }
+
+  console.log(">>> countryName:", countryName);
+  console.log(">>> actualDate:", actualDate);
+  console.log(">>> travelDate:", travelDate);
+
   return (
     <div className="form">
       <form >
 
         <h2>Form Title</h2>
 
-        <label>Full Name</label>
-        <input
-          name="fullname" 
-          type="text"
-          placeholder="Full name"
-          // value={}
-          onChange={""} 
-        />
+        <label className="lb1 d-flex flex-column mb-3" >
+          <span className="sp1 text-left text-semi-bold">Full name</span>
+          <input
+            className="form-control"
+            type="text"
+            name="fullname" 
+            placeholder="your fullname"
+            // value={}
+            maxLength="60"
+            onChange={handleEditInputChange} 
+          />
 
-        <label>Country name</label>
-        <select>
-          <option value="colombia">Colombia</option>
-          <option value="peru">Peru</option>
-          <option value="argentina">Argentina</option>
-          <option value="chile">Chile</option>
-          <option value="brasil">Brasil</option>
-        </select>
+        </label>
+
+        {/* <label>Where are you going?</label> */}
+        <div className="country py-3">
+          <select className="select-country ps-2 pe-5 py-2 text-secondary rounded" value={countryName} onChange={(event) => handleChangeValue(event)}>
+            <option className="" value="default" disabled >Where are you going?</option>
+            <option value="peru">Peru</option>
+            <option value="argentina">Argentina</option>
+            <option value="chile">Chile</option>
+            <option value="brasil">Brasil</option>
+          </select>
+        </div>
+
+        <div className="py-3">
+          <DatePicker
+            className="select-date pe-4 py-2 text-secondary rounded"
+            selected={null || travelDate} 
+            onChange={(date) => setTravelDate(date)} 
+            minDate={actualDate}
+            placeholderText="Travel date"
+            // maxDate={startDate.setDate(startDate.getDate()+10)}
+          />
+        </div>
 
       </form>
     </div>

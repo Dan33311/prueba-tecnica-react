@@ -40,3 +40,33 @@
 button {
   font-size: calc(10px + 2vmin);
 }
+
+.form {
+  margin-top: 100px;
+  padding: 30px;
+  outline: 1px solid #61dafb;
+}
+
+/* .lb1 {
+  outline: 1px solid salmon;
+} */
+
+.sp1 {
+  text-align: start;
+  /* outline: 1px solid lime; */
+}
+
+/* .country{
+  outline: 1px solid lime;
+
+} */
+.select-country{
+  font-size: 1.2rem;
+}
+
+.select-date{
+  font-size: 1.2rem;
+  padding-left: 15px;
+  /* outline: 1px solid salmon; */
+
+}
