@@ -1,7 +1,8 @@
-import Form from '../pages/Form'
 import './App.css'
+import FormComponent from './components/FormComponent'
+import { FormProvider } from './context/FormContext'
 
-/*
+/* DONE
 - Vista 1: Formulario solicitando la siguiente información
 a. Nombre completo {fullName}
 b. A que país te gustaría viajar {countryName}
@@ -11,11 +12,14 @@ Información adicional: Una vez enviado el formulario, este debe
 redirigir a una vista que se especificara en “Vista 2”
 */
 
-function App() {
+const App = () => {
+  
 
   return (
     <div className="App">
-      <Form></Form>
+      <FormProvider>
+        <FormComponent/>
+      </FormProvider>
     </div>
   )
 }
