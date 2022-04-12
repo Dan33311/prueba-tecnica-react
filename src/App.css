@@ -68,5 +68,39 @@ button {
   font-size: 1.2rem;
   padding-left: 15px;
   /* outline: 1px solid salmon; */
+}
 
+
+.countdown-timer-container{
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.countdown-timer {
+  width: 600px;
+  height: 100px;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.countdown-timer span {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.two-numbers {
+  width: 2ch;
+  margin-right: 200px;
+}
+
+.timer-text {
+  color: #61dafb;
 }

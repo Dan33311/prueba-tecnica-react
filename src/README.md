@@ -6,7 +6,9 @@
 
 
 
-# Vite Project
+## Vite Project
+***
+Project created with Vite
 
 ## Installation
 ***

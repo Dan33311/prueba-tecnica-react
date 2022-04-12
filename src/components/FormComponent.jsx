@@ -1,13 +1,15 @@
 import { useContext } from "react";
-import FormContext from "../context/FormContext";
+import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker"
-
 import "react-datepicker/dist/react-datepicker.css"
+import FormContext from "../context/FormContext";
 
 
 const FormComponent = () => {
   
   const actualDate = new Date()
+  // const now = actualDate
+  const navigate = useNavigate()
 
   const {
     travelDate,
@@ -26,9 +28,11 @@ const FormComponent = () => {
   }
   const handleSubmit = (e) => {
     e.preventDefault()
+    navigate('/countdown')
     console.log(">>> (submit) countryName:", countryName);
     console.log(">>> (submit) fullName:", fullName);
     console.log(">>> (submit) travelDate:", travelDate);
+    console.log(travelDate);
   }
 
   const regexpVerification = (e) => {
@@ -41,7 +45,7 @@ const FormComponent = () => {
   console.log(">>> countryName:", countryName);
   console.log(">>> actualDate:", actualDate);
   console.log(">>> travelDate:", travelDate);
-
+  // console.log(">>> now:", now);
 
   return (
     <div className="form">
