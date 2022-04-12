@@ -6,7 +6,7 @@ export default FormContext
 
 export const FormProvider = ({children}) => {
   const [travelDate, setTravelDate] = useState()
-  const [countryName, setCountryName] = useState("default")
+  const [countryName, setCountryName] = useState("")
   const [fullName, setFullName] = useState("")
 
   return (

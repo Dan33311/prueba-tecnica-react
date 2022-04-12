@@ -3,6 +3,7 @@ import './App.css'
 import { FormProvider } from './context/FormContext'
 import FormComponent from './components/FormComponent'
 import CountdownTimer from './components/CountdownTimer/CountdownTimer'
+import VistaTres from './components/VistaTres'
 
 
 /* TODO: 
@@ -24,6 +25,7 @@ const App = () => {
           <Routes>
             <Route path='/' element={<FormComponent/>} />
             <Route path='/countdown' element={<CountdownTimer/>} />
+            <Route path='/vistatres' element={<VistaTres/>} />
           </Routes>
         </FormProvider>
       </BrowserRouter>

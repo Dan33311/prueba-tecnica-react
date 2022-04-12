@@ -28,11 +28,14 @@ const FormComponent = () => {
   }
   const handleSubmit = (e) => {
     e.preventDefault()
+    if(travelDate === undefined){
+      setTravelDate(actualDate)
+    }
     navigate('/countdown')
     console.log(">>> (submit) countryName:", countryName);
     console.log(">>> (submit) fullName:", fullName);
     console.log(">>> (submit) travelDate:", travelDate);
-    console.log(travelDate);
+    console.log(">>> travelDate:", travelDate);
   }
 
   const regexpVerification = (e) => {
@@ -41,6 +44,14 @@ const FormComponent = () => {
       e.preventDefault();
     }
   }
+
+  const ExampleCustomTimeInput = ({ date, value, onChange }) => (
+    <input
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      style={{ border: "solid 1px pink" }}
+    />
+  );
 
   console.log(">>> countryName:", countryName);
   console.log(">>> actualDate:", actualDate);
@@ -58,8 +69,9 @@ const FormComponent = () => {
           <input
             className="form-control"
             type="text"
-            name="fullname" 
-            placeholder="your full name"
+            name="fullname"
+            required='Please fill out this field.' 
+            placeholder="Your full name"
             // value={}
             maxLength="60"
             onChange={handleEditInputChange}
@@ -74,8 +86,9 @@ const FormComponent = () => {
             className="select-country ps-2 pe-5 py-2 text-secondary rounded" 
             value={countryName} 
             onChange={(event) => handleChangeValue(event)}
+            required
           >
-            <option className="" value="default" disabled >Where are you going?</option>
+            <option className="" value="" disabled>Where are you going?</option>
             <option value="peru">Peru</option>
             <option value="argentina">Argentina</option>
             <option value="chile">Chile</option>
@@ -86,11 +99,13 @@ const FormComponent = () => {
         <div className="py-3">
           <DatePicker
             className="select-date pe-4 py-2 text-secondary rounded"
-            selected={null || travelDate}
+            placeholderText="Travel date"
+            // if null -> show placeholderText
+            selected={(travelDate === undefined) ? null : travelDate}
             onChange={(date) => setTravelDate(date)} 
             minDate={actualDate}
-            placeholderText="Travel date"
-            showTimeSelect 
+            showTimeInput
+            customTimeInput={<ExampleCustomTimeInput />}
             // maxDate={startDate.setDate(startDate.getDate()+10)}
           />
         </div>
