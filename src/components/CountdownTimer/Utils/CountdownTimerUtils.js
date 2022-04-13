@@ -4,12 +4,9 @@ import dayjs from 'dayjs'
 export function getRemainingTimeUntilMsTimestamp (timestampMs) {
   const timestampDayjs = dayjs(timestampMs)
   const nowDayjs = dayjs()
-  // const navigate = useNavigate()
-  // if(timestampDayjs === nowDayjs) {
-  //   console.log("time is zero");
-  // }
+
   if(timestampDayjs.isBefore(nowDayjs)) {
-    // navigate('/vistatres')
+    // navigate('/about')
     return {
       seconds: '00',
       minutes: '01',

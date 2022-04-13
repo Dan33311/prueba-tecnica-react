@@ -3,6 +3,47 @@ import FormContext from "../context/FormContext";
 import useFetch from "../Hooks/useFetch";
 
 
+const About = () => {
+
+  const { countryName } = useContext(FormContext)
+
+  const { data: info, isPending, error } = useFetch(`https://restcountries.com/v3.1/name/${countryName}`)
+
+  // console.log(" >>> info:", info);
+
+  return (
+    
+    <>
+      { error && <div>{ error }</div>}
+
+      { info && isPending === false 
+        ? 
+          <div className="about">
+            <h1>Interesting Facts</h1>
+            <h1>{info[0].name.common}</h1>
+            <img src={info[0].flags.png} alt="" />
+            <p><span>Population: </span>{info[0].population.toLocaleString()}</p>
+            <p><span>Capital: </span>{info[0].capital}</p>
+            <p><span>Region: </span>{info[0].subregion}</p>
+            {info[0].languages.spa ? <p><span>Language: </span>{info[0].languages.spa}</p> : <p><span>Language: </span>{info[0].languages.por}</p>}
+            {info[0].currencies.COP && <p><span>Currency: </span>{info[0].currencies.COP.name}</p> }
+            {info[0].currencies.PEN && <p><span>Currency: </span>{info[0].currencies.PEN.name}</p> }
+            {info[0].currencies.ARS && <p><span>Currency: </span>{info[0].currencies.ARS.name}</p> }
+            {info[0].currencies.BRL && <p><span>Currency: </span>{info[0].currencies.BRL.name}</p> }
+            <p><span>Time Zone: </span>{info[0].timezones}</p>
+          </div>
+        : 
+          <h1>Loading ...</h1> 
+      }
+    </>
+
+  )
+}
+
+export default About;
+
+
+
 // Vista 3: Aquí se debe visualizar la información relevante del país, como
 // imágenes de sitios turísticos, Nombre de la capital, bandera, escudo del país
 // y moneda
@@ -38,69 +79,3 @@ import useFetch from "../Hooks/useFetch";
 // debe mostrar únicamente la vista 3, sin permitir el acceso a las vistas 1 y 2.
 // 5. En la vista 3 se debe poner un botón que permita volver al inicio de todo el
 // proceso, es decir a la vista 1. (Borrar sesión o local storage)
-
-
-
-
-const About = () => {
-
-  const {
-    travelDate,
-    setTravelDate,
-    countryName,
-    setCountryName,
-    fullName,
-    setFullName
-  } = useContext(FormContext)
-
-  const { data: info, isPending, error } = useFetch(`https://restcountries.com/v3.1/name/${countryName}`)
-
-  // console.log(" >>> isPending:", isPending);
-  console.log(" >>> info:", info);
-  // console.log(" >>> info[0].name.common:", info[0].name.common);
-  // console.log(" >>> error", error);
-  console.log(" >>> fullName:", fullName)
-  console.log(" >>> countryName:", countryName)
-
-  return (
-    
-    <>
-      { error && <div>{ error }</div>}
-
-      { info && isPending === false 
-        ? 
-          <div className="about">
-            <h1>Interesting Facts</h1>
-            <h1>{info[0].name.common}</h1>
-            <img src={info[0].flags.png} alt="" />
-            <p><span>Population: </span>{info[0].population.toLocaleString()}</p>
-            <p><span>Capital: </span>{info[0].capital}</p>
-            <p><span>Region: </span>{info[0].subregion}</p>
-            {info[0].languages.spa ? <p><span>Language: </span>{info[0].languages.spa}</p> : <p><span>Language: </span>{info[0].languages.por}</p>}
-            {info[0].currencies.COP && <p><span>Currency: </span>{info[0].currencies.COP.name}</p> }
-            {info[0].currencies.PEN && <p><span>Currency: </span>{info[0].currencies.PEN.name}</p> }
-            {info[0].currencies.ARS && <p><span>Currency: </span>{info[0].currencies.ARS.name}</p> }
-            {info[0].currencies.BRL && <p><span>Currency: </span>{info[0].currencies.BRL.name}</p> }
-            <p><span>Time Zone: </span>{info[0].timezones}</p>
-          </div>
-        : 
-          <h1>Loading ...</h1> 
-      }
-    </>
-
-  )
-}
-
-export default About;
-
-
-// {info.map((country) => {
-//   const { capital, startOfWeek } = country
-
-//   return 
-//     <div className="about">
-//     <h1>{capital}</h1>
-//     <h1>{startOfWeek}</h1>
-//     {/* <h1>About {info[0].name.common}</h1> */}
-//   </div>
-// })}

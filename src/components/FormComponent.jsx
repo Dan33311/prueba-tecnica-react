@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
@@ -16,11 +16,20 @@ const FormComponent = () => {
     countryName,
     setCountryName,
     fullName,
-    setFullName
+    setFullName,
+    formData,
+    setFormData,
+    storedValue,
+    setStoredValue
   } = useContext(FormContext)
 
-  const handleEditInputChange = (event) => {
-    setFullName(event.target.value)
+  useEffect(() => {
+    localStorage.setItem("storedValue", JSON.stringify(storedValue))
+  }, [storedValue])
+
+  const onChangeFullName = (e) => {
+    setFullName(e.target.value)
+    setFormData({ ...formData, fullname: e.target.value })
   }
   const regexpVerification = (e) => {
     const re = /[a-zA-Z ]+/g;
@@ -29,9 +38,16 @@ const FormComponent = () => {
     }
   }
 
-  const handleChangeValue = (event) => {
-    setCountryName(event.target.value)
+  const onChangeCountryName = (e) => {
+    setCountryName(e.target.value)
+    setFormData({ ...formData, countryname: e.target.value })
   }
+
+  const onChangeTravelDate = (date) => {
+    setTravelDate(date)
+    setFormData({ ...formData, traveldate: date })
+  }
+  
   const ExampleCustomTimeInput = ({ date, value, onChange }) => (
     <input
       value={value}
@@ -39,30 +55,35 @@ const FormComponent = () => {
       style={{ border: "solid 1px pink" }}
     />
   )
-  const handleSubmit = (e) => {
+
+  const handleFormSubmit = (e) => {
     e.preventDefault()
     if(travelDate === undefined){
       setTravelDate(actualDate)
     }
-    navigate('/countdown')
-    // navigate('/about')
-    console.log(">>> (submit) countryName:", countryName);
-    console.log(">>> (submit) fullName:", fullName);
-    console.log(">>> (submit) travelDate:", travelDate);
-    console.log(">>> travelDate:", travelDate);
+    setStoredValue(formData)
+    // setFormData({
+    //   countryname: '',
+    //   fullname: '',
+    //   traveldate: {}
+    // })
+    console.log(">>> (submit) formData:", formData);
+    console.log(">>> (submit) almacenamiento:", storedValue);
+    console.log(">>> (submit) almacenamiento.traveldate:", storedValue.traveldate);
+    setTimeout(() => {
+      navigate('/countdown')
+      // navigate('/about')   
+    }, 1000)
   }
 
-  
-
-  console.log(">>> countryName:", countryName);
-  console.log(">>> actualDate:", actualDate);
-  console.log(">>> travelDate:", travelDate);
+  console.log(">>> formData:", formData);
+  console.log(">>> storedValue:", storedValue);
 
 
   return (
     <div className="form-container">
       <div className="form d-flex flex-column justify-content-center p-5 rounded">
-        <form onSubmit={handleSubmit} >
+        <form onSubmit={handleFormSubmit} >
 
           <h2 className="pb-4 pt-2 form-title">Form Title</h2>
 
@@ -76,7 +97,7 @@ const FormComponent = () => {
               placeholder="Your full name"
               // value={}
               maxLength="60"
-              onChange={handleEditInputChange}
+              onChange={onChangeFullName}
               onKeyPress={(e) => regexpVerification(e)} 
             />
           </label>
@@ -85,7 +106,7 @@ const FormComponent = () => {
             <select 
               className="select-country text-secondary rounded" 
               value={countryName} 
-              onChange={(event) => handleChangeValue(event)}
+              onChange={(event) => onChangeCountryName(event)}
               required
             >
               <option className="" value="" disabled>Where are you going?</option>
@@ -102,7 +123,8 @@ const FormComponent = () => {
               placeholderText="Your travel date"
               // if null -> show placeholderText
               selected={(travelDate === undefined) ? null : travelDate}
-              onChange={(date) => setTravelDate(date)} 
+              // onChange={(date) => setTravelDate(date)} 
+              onChange={onChangeTravelDate} 
               minDate={actualDate}
               showTimeInput
               customTimeInput={<ExampleCustomTimeInput />}
