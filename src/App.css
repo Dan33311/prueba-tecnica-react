@@ -38,13 +38,27 @@
 }
 
 .form {
+  
   /* padding: 30px; */
-  outline: 1px solid #61dafb;
+  /* box-shadow: 0 0 0 0.15rem #fcb27199; */
+  outline: 3px solid #FCB371;
+}
+.form-title{
+  color: #FCB371;
 }
 
 .form-t {
   font-size: 1.2rem;
 }
+
+.form-t:focus {
+  border-style: inset;
+  outline: none;
+  border-width: 3px;
+  border-color:  #fcb27199;
+  box-shadow: 0 0 0 0.05rem #fcb27199;
+}
+
 /* .lb1 {
   outline: 1px solid salmon;
 } */
@@ -72,7 +86,7 @@
 .btn-form{
   min-width: 320px;
   margin-top: -40px;
-  background-color: #61dafb;
+  background-color: #FCB371;
   color: #282c34;
 }
 
@@ -108,6 +122,23 @@
 }
 
 .timer-text {
-  color: #61dafb;
+  color: #FCB371;
 }
 
+
+
+.about {
+  font-size: 1.2rem;
+  font-weight: lighter;
+}
+.about h1 {
+  color: #FCB371;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+.about img {
+  margin-bottom: 1.5rem;
+}
+.about span {
+  font-weight: 600;
+}

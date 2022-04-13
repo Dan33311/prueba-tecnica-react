@@ -42,7 +42,7 @@ import useFetch from "../Hooks/useFetch";
 
 
 
-const VistaTres = () => {
+const About = () => {
 
   const {
     travelDate,
@@ -70,11 +70,18 @@ const VistaTres = () => {
       { info && isPending === false 
         ? 
           <div className="about">
-            <h1>About {info[0].name.common}</h1>
-            <p>Population: {info[0].population}</p>
-            <p>Region: {info[0].subregion}</p>
-            {info[0].languages.spa ? <p>Language: {info[0].languages.spa}</p> : <p>Language: {info[0].languages.por}</p>}
+            <h1>Interesting Facts</h1>
+            <h1>{info[0].name.common}</h1>
             <img src={info[0].flags.png} alt="" />
+            <p><span>Population: </span>{info[0].population.toLocaleString()}</p>
+            <p><span>Capital: </span>{info[0].capital}</p>
+            <p><span>Region: </span>{info[0].subregion}</p>
+            {info[0].languages.spa ? <p><span>Language: </span>{info[0].languages.spa}</p> : <p><span>Language: </span>{info[0].languages.por}</p>}
+            {info[0].currencies.COP && <p><span>Currency: </span>{info[0].currencies.COP.name}</p> }
+            {info[0].currencies.PEN && <p><span>Currency: </span>{info[0].currencies.PEN.name}</p> }
+            {info[0].currencies.ARS && <p><span>Currency: </span>{info[0].currencies.ARS.name}</p> }
+            {info[0].currencies.BRL && <p><span>Currency: </span>{info[0].currencies.BRL.name}</p> }
+            <p><span>Time Zone: </span>{info[0].timezones}</p>
           </div>
         : 
           <h1>Loading ...</h1> 
@@ -84,7 +91,7 @@ const VistaTres = () => {
   )
 }
 
-export default VistaTres;
+export default About;
 
 
 // {info.map((country) => {

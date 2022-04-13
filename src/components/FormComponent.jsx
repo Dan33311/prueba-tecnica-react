@@ -44,8 +44,8 @@ const FormComponent = () => {
     if(travelDate === undefined){
       setTravelDate(actualDate)
     }
-    // navigate('/countdown')
-    navigate('/vistatres')
+    navigate('/countdown')
+    // navigate('/about')
     console.log(">>> (submit) countryName:", countryName);
     console.log(">>> (submit) fullName:", fullName);
     console.log(">>> (submit) travelDate:", travelDate);
@@ -61,10 +61,10 @@ const FormComponent = () => {
 
   return (
     <div className="form-container">
-      <div className="d-flex flex-column justify-content-center form p-5 rounded">
+      <div className="form d-flex flex-column justify-content-center p-5 rounded">
         <form onSubmit={handleSubmit} >
 
-          <h2 className="pb-4 pt-2">Form Title</h2>
+          <h2 className="pb-4 pt-2 form-title">Form Title</h2>
 
           <label className="lb1 d-flex flex-column mb-3" >
             {/* <span className="sp1 text-left text-semi-bold pb-1">Full name:</span> */}
@@ -89,9 +89,9 @@ const FormComponent = () => {
               required
             >
               <option className="" value="" disabled>Where are you going?</option>
+              <option value="colombia">Colombia</option>
               <option value="peru">Peru</option>
               <option value="argentina">Argentina</option>
-              <option value="chile">Chile</option>
               <option value="brasil">Brasil</option>
             </select>
           </div>
