@@ -1,3 +1,6 @@
+import { useContext } from "react";
+import FormContext from "../context/FormContext";
+import useFetch from "../Hooks/useFetch";
 
 
 // Vista 3: Aquí se debe visualizar la información relevante del país, como
@@ -40,9 +43,57 @@
 
 
 const VistaTres = () => {
+
+  const {
+    travelDate,
+    setTravelDate,
+    countryName,
+    setCountryName,
+    fullName,
+    setFullName
+  } = useContext(FormContext)
+
+  const { data: info, isPending, error } = useFetch(`https://restcountries.com/v3.1/name/${countryName}`)
+
+  // console.log(" >>> isPending:", isPending);
+  console.log(" >>> info:", info);
+  // console.log(" >>> info[0].name.common:", info[0].name.common);
+  // console.log(" >>> error", error);
+  console.log(" >>> fullName:", fullName)
+  console.log(" >>> countryName:", countryName)
+
   return (
-    <h1>vista tres</h1>
-  );
+    
+    <>
+      { error && <div>{ error }</div>}
+
+      { info && isPending === false 
+        ? 
+          <div className="about">
+            <h1>About {info[0].name.common}</h1>
+            <p>Population: {info[0].population}</p>
+            <p>Region: {info[0].subregion}</p>
+            {info[0].languages.spa ? <p>Language: {info[0].languages.spa}</p> : <p>Language: {info[0].languages.por}</p>}
+            <img src={info[0].flags.png} alt="" />
+          </div>
+        : 
+          <h1>Loading ...</h1> 
+      }
+    </>
+
+  )
 }
 
 export default VistaTres;
+
+
+// {info.map((country) => {
+//   const { capital, startOfWeek } = country
+
+//   return 
+//     <div className="about">
+//     <h1>{capital}</h1>
+//     <h1>{startOfWeek}</h1>
+//     {/* <h1>About {info[0].name.common}</h1> */}
+//   </div>
+// })}
