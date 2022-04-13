@@ -9,7 +9,7 @@ export function getRemainingTimeUntilMsTimestamp (timestampMs) {
     // navigate('/about')
     return {
       seconds: '00',
-      minutes: '01',
+      minutes: '00',
       hours: '00',
       days: '00'
     }

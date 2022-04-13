@@ -33,18 +33,26 @@ const CountdownTimer = () => {
 
   return(
     <div className="countdown-timer-container">
-      <span>{`“Hello ${storedValue.fullname}” you have`}</span>
+      <div className="c-name pb-3">"Hello <span>{storedValue.fullname}</span>"&nbsp; you have</div>
       <div className="countdown-timer">
-        <span className="timer-text">{remainingTime.days}</span>
-        <span className="me-3">days</span>
-        <span className="two-numbers timer-text">{remainingTime.hours}</span>
-        <span className="me-3">hours</span>
-        <span className="two-numbers timer-text">{remainingTime.minutes}</span>
-        <span className="me-3">minutes</span>
-        <span className="two-numbers timer-text">{remainingTime.seconds}</span>
-        <span className="me-3">seconds</span>
+        <div className="">
+          <div className="timer-text px-4 pt-2">{remainingTime.days}</div>
+          <div className="pb-4">DAYS</div>
+        </div>
+        <div className="">
+          <div className="timer-text px-4 pt-2">{remainingTime.hours}</div>
+          <div className="pb-4">HOURS</div>
+        </div>
+        <div className="">
+          <div className="timer-text px-4 pt-2">{remainingTime.minutes}</div>
+          <div className="pb-4">MINUTES</div>
+        </div>
+        <div className="">
+          <div className="timer-text px-4 pt-2">{remainingTime.seconds}</div>
+          <div className="pb-4">SECONDS</div>
+        </div>
       </div>
-      <span>{`left to start your trip to ${storedValue.countryname.charAt(0).toUpperCase() + storedValue.countryname.slice(1)}.`}</span>
+      <div className="c-name pt-3">left to start your trip to &nbsp;<span>{storedValue.countryname.charAt(0).toUpperCase() + storedValue.countryname.slice(1)}.</span></div>
     </div>
   )
 }
