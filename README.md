@@ -38,8 +38,9 @@ A list of technologies used within the project:
 
 ### Vista 2
 ***
-✅ Mensaje de bienvenida
-✅ Contador
+✅ Mensaje de bienvenida (fullnName, countryName)
+✅ Contador (travelDate)
+✅ LocalStorage
 💬 Redireccionamiento: Al momento de terminar el conteo, no es posible redireccionar a vista 3, el componente `components/CountdownTimer/CountdownTimerUtils` no me permitio utilizar Hooks.
 
 ### Vista 3

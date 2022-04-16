@@ -23,6 +23,7 @@ const FormComponent = () => {
     setStoredValue
   } = useContext(FormContext)
 
+  
   useEffect(() => {
     localStorage.setItem("storedValue", JSON.stringify(storedValue))
   }, [storedValue])
@@ -45,7 +46,8 @@ const FormComponent = () => {
 
   const onChangeTravelDate = (date) => {
     setTravelDate(date)
-    setFormData({ ...formData, traveldate: date })
+    const timeToTravelInMilliseconds = date.getTime()
+    setFormData({ ...formData, traveldate: timeToTravelInMilliseconds })
   }
   
   const ExampleCustomTimeInput = ({ date, value, onChange }) => (
@@ -62,11 +64,7 @@ const FormComponent = () => {
       setTravelDate(actualDate)
     }
     setStoredValue(formData)
-    // setFormData({
-    //   countryname: '',
-    //   fullname: '',
-    //   traveldate: {}
-    // })
+    
     console.log(">>> (submit) formData:", formData);
     console.log(">>> (submit) almacenamiento:", storedValue);
     console.log(">>> (submit) almacenamiento.traveldate:", storedValue.traveldate);
@@ -123,7 +121,6 @@ const FormComponent = () => {
               placeholderText="Your travel date"
               // if null -> show placeholderText
               selected={(travelDate === undefined) ? null : travelDate}
-              // onChange={(date) => setTravelDate(date)} 
               onChange={onChangeTravelDate} 
               minDate={actualDate}
               showTimeInput

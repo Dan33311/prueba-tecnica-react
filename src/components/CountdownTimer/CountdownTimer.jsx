@@ -11,14 +11,12 @@ const defaultRemainingTime = {
 }
 
 const CountdownTimer = () => {
+
   const [remainingTime, setRemainingTime] = useState(defaultRemainingTime)
   // const { travelDate, fullName, countryName } = useContext(FormContext)
   const { storedValue } = useContext(FormContext)
-
   // const timeToTravelInMilliseconds = travelDate.getTime()
-  const timeToTravelInMilliseconds = storedValue.traveldate.getTime()
-
-  console.log(" >>> timeToTravelInMilliseconds:", timeToTravelInMilliseconds)
+  const timeToTravelInMilliseconds = storedValue.traveldate
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -31,30 +29,34 @@ const CountdownTimer = () => {
     setRemainingTime(getRemainingTimeUntilMsTimestamp(countdown))
   }
 
+
   return(
     <div className="countdown-timer-container">
       <div className="c-name pb-3">"Hello <span>{storedValue.fullname}</span>"&nbsp; you have</div>
       <div className="countdown-timer">
-        <div className="">
-          <div className="timer-text px-4 pt-2">{remainingTime.days}</div>
-          <div className="pb-4">DAYS</div>
+        <div className="timer">
+          <div className="timer-number px-4 pt-2">{remainingTime.days}</div>
+          <div className="timer-text pb-4">DAYS</div>
         </div>
-        <div className="">
-          <div className="timer-text px-4 pt-2">{remainingTime.hours}</div>
-          <div className="pb-4">HOURS</div>
+        <div className="timer">
+          <div className="timer-number px-4 pt-2">{remainingTime.hours}</div>
+          <div className="timer-text pb-4">HOURS</div>
         </div>
-        <div className="">
-          <div className="timer-text px-4 pt-2">{remainingTime.minutes}</div>
-          <div className="pb-4">MINUTES</div>
+        <div className="timer">
+          <div className="timer-number px-4 pt-2">{remainingTime.minutes}</div>
+          <div className="timer-text pb-4">MINUTES</div>
         </div>
-        <div className="">
-          <div className="timer-text px-4 pt-2">{remainingTime.seconds}</div>
-          <div className="pb-4">SECONDS</div>
+        <div className="timer">
+          <div className="timer-number px-4 pt-2">{remainingTime.seconds}</div>
+          <div className="timer-text pb-4">SECONDS</div>
         </div>
       </div>
-      <div className="c-name pt-3">left to start your trip to &nbsp;<span>{storedValue.countryname.charAt(0).toUpperCase() + storedValue.countryname.slice(1)}.</span></div>
+      <div className="c-name pt-3">left to start your trip to &nbsp;
+        <span>{storedValue.countryname.charAt(0).toUpperCase() + storedValue.countryname.slice(1)}.</span>
+      </div>
     </div>
   )
+  
 }
 
 export default CountdownTimer
