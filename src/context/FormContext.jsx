@@ -1,29 +1,15 @@
-import { useState, createContext } from "react";
+import { createContext } from "react";
+import useLocalstorage from "../Hooks/useLocalStorage";
 
 const FormContext = createContext()
 export default FormContext
 
-
 export const FormProvider = ({children}) => {
-  
-  const [storedValue, setStoredValue] = useState(() => {
-    let setValue = localStorage.getItem('storedValue')
-    if (setValue) {
-      return JSON.parse(setValue);
-    } else {
-      return [];
-    }
-  })
 
-  const [travelDate, setTravelDate] = useState()
-  const [countryName, setCountryName] = useState("")
-  const [fullName, setFullName] = useState("")
+  const [travelDate, setTravelDate] = useLocalstorage('travelDate', )
+  const [countryName, setCountryName] = useLocalstorage('countryName', '')
+  const [fullName, setFullName] = useLocalstorage('fullName', '')
 
-  const [formData, setFormData] = useState({
-    countryname: '',
-    fullname: '',
-    traveldate: {}
-  })
 
   return (
     <FormContext.Provider value={{
@@ -33,10 +19,6 @@ export const FormProvider = ({children}) => {
       setCountryName,
       fullName,
       setFullName,
-      formData,
-      setFormData,
-      storedValue,
-      setStoredValue,
     }}>
       {children}
     </FormContext.Provider>

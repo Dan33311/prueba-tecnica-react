@@ -13,10 +13,9 @@ const defaultRemainingTime = {
 const CountdownTimer = () => {
 
   const [remainingTime, setRemainingTime] = useState(defaultRemainingTime)
-  // const { travelDate, fullName, countryName } = useContext(FormContext)
-  const { storedValue } = useContext(FormContext)
-  // const timeToTravelInMilliseconds = travelDate.getTime()
-  const timeToTravelInMilliseconds = storedValue.traveldate
+  const { travelDate, fullName, countryName } = useContext(FormContext)
+  
+  const timeToTravelInMilliseconds = travelDate
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -32,7 +31,7 @@ const CountdownTimer = () => {
 
   return(
     <div className="countdown-timer-container">
-      <div className="c-name pb-3">"Hello <span>{storedValue.fullname}</span>"&nbsp; you have</div>
+      <div className="country-name pb-3">"Hello <span>{fullName.toUpperCase()}</span>"&nbsp; you have</div>
       <div className="countdown-timer">
         <div className="timer">
           <div className="timer-number px-4 pt-2">{remainingTime.days}</div>
@@ -51,8 +50,8 @@ const CountdownTimer = () => {
           <div className="timer-text pb-4">SECONDS</div>
         </div>
       </div>
-      <div className="c-name pt-3">left to start your trip to &nbsp;
-        <span>{storedValue.countryname.charAt(0).toUpperCase() + storedValue.countryname.slice(1)}.</span>
+      <div className="country-name pt-4">left to start your trip to &nbsp;
+        <span>{countryName.toUpperCase()}</span>
       </div>
     </div>
   )

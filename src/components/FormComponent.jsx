@@ -15,22 +15,13 @@ const FormComponent = () => {
     setTravelDate,
     countryName,
     setCountryName,
-    fullName,
     setFullName,
-    formData,
-    setFormData,
-    storedValue,
-    setStoredValue
   } = useContext(FormContext)
 
-  
-  useEffect(() => {
-    localStorage.setItem("storedValue", JSON.stringify(storedValue))
-  }, [storedValue])
 
   const onChangeFullName = (e) => {
     setFullName(e.target.value)
-    setFormData({ ...formData, fullname: e.target.value })
+    // setFormData({ ...formData, fullname: e.target.value })
   }
   const regexpVerification = (e) => {
     const re = /[a-zA-Z ]+/g;
@@ -41,13 +32,14 @@ const FormComponent = () => {
 
   const onChangeCountryName = (e) => {
     setCountryName(e.target.value)
-    setFormData({ ...formData, countryname: e.target.value })
+    // setFormData({ ...formData, countryname: e.target.value })
   }
 
   const onChangeTravelDate = (date) => {
     setTravelDate(date)
     const timeToTravelInMilliseconds = date.getTime()
-    setFormData({ ...formData, traveldate: timeToTravelInMilliseconds })
+    // setFormData({ ...formData, traveldate: timeToTravelInMilliseconds })
+    setTravelDate(timeToTravelInMilliseconds)
   }
   
   const ExampleCustomTimeInput = ({ date, value, onChange }) => (
@@ -63,19 +55,11 @@ const FormComponent = () => {
     if(travelDate === undefined){
       setTravelDate(actualDate)
     }
-    setStoredValue(formData)
-    
-    console.log(">>> (submit) formData:", formData);
-    console.log(">>> (submit) almacenamiento:", storedValue);
-    console.log(">>> (submit) almacenamiento.traveldate:", storedValue.traveldate);
     setTimeout(() => {
       navigate('/countdown')
       // navigate('/about')   
     }, 1000)
   }
-
-  console.log(">>> formData:", formData);
-  console.log(">>> storedValue:", storedValue);
 
 
   return (

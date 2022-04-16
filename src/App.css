@@ -95,8 +95,9 @@
   justify-content: center;
   align-items: center;
 }
-.c-name span {
-  font-size: 2.2rem;
+.country-name span {
+  font-size: 1.7rem;
+  font-weight: 600;
   color: #FCB371;
 }
 .timer{
@@ -107,12 +108,11 @@
   color: #FCB371;
 }
 .timer-text {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 }
 /* .two-numbers {
   width: 2ch;
   margin-right: 200px;
-  outline: 1px solid red;
 } */
 
 
