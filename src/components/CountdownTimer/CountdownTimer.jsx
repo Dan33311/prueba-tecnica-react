@@ -1,4 +1,6 @@
 import {useState, useEffect, useContext} from 'react'
+import { useNavigate } from 'react-router-dom'
+
 import FormContext from '../../context/FormContext'
 import {getRemainingTimeUntilMsTimestamp} from './Utils/CountdownTimerUtils'
 
@@ -12,9 +14,11 @@ const defaultRemainingTime = {
 
 const CountdownTimer = () => {
 
+  const navigate = useNavigate()
+
   const [remainingTime, setRemainingTime] = useState(defaultRemainingTime)
   const { travelDate, fullName, countryName } = useContext(FormContext)
-  
+
   const timeToTravelInMilliseconds = travelDate
 
   useEffect(() => {
@@ -28,6 +32,8 @@ const CountdownTimer = () => {
     setRemainingTime(getRemainingTimeUntilMsTimestamp(countdown))
   }
 
+  if(remainingTime.seconds  === '99') navigate('/about')
+  
 
   return(
     <div className="countdown-timer-container">

@@ -1,39 +1,60 @@
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import FormContext from "../context/FormContext";
 import useFetch from "../Hooks/useFetch";
 
 
 const About = () => {
 
-  const { countryName } = useContext(FormContext)
+  const { 
+    setTravelDate,
+    countryName,
+    setCountryName,
+    setFullName,
+  } = useContext(FormContext)
 
   const { data: info, isPending, error } = useFetch(`https://restcountries.com/v3.1/name/${countryName}`)
+  const navigate = useNavigate()
 
-  // console.log(" >>> info:", info);
+  if (error) {
+    setTimeout(() => {
+      navigate('/')
+    }, 1000);
+  }
+
+  const handleClickButton = () => {
+    setTravelDate()
+    setCountryName('')
+    setFullName('')
+    navigate('/')
+  }
+
 
   return (
     
     <>
-      { error && <div>{ error }</div>}
+      { (info === null && isPending === false && error) && <div>{ error }</div> }
 
-      { info && isPending === false 
+      { (info === null && isPending === true) && <h1>Loading ...</h1> }
+
+      { info && isPending === false && error === null
         ? 
           <div className="about">
             <h1>Interesting Facts</h1>
-            <h1>{info[0].name.common}</h1>
+            <h1 className="about-text">{info[0].name.common}</h1>
             <img src={info[0].flags.png} alt="" />
             <p><span>Population: </span>{info[0].population.toLocaleString()}</p>
             <p><span>Capital: </span>{info[0].capital}</p>
-            <p><span>Region: </span>{info[0].subregion}</p>
             {info[0].languages.spa ? <p><span>Language: </span>{info[0].languages.spa}</p> : <p><span>Language: </span>{info[0].languages.por}</p>}
             {info[0].currencies.COP && <p><span>Currency: </span>{info[0].currencies.COP.name}</p> }
             {info[0].currencies.PEN && <p><span>Currency: </span>{info[0].currencies.PEN.name}</p> }
             {info[0].currencies.ARS && <p><span>Currency: </span>{info[0].currencies.ARS.name}</p> }
             {info[0].currencies.BRL && <p><span>Currency: </span>{info[0].currencies.BRL.name}</p> }
             <p><span>Time Zone: </span>{info[0].timezones}</p>
+            <button onClick={() => handleClickButton()} className="btn px-3 btn-form">New Session</button>
           </div>
         : 
-          <h1>Loading ...</h1> 
+          null
       }
     </>
 

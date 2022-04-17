@@ -121,13 +121,21 @@
   font-weight: lighter;
 }
 .about h1 {
+  font-weight: 500;
+  margin-bottom: 2rem;
+}
+.about-text{
   color: #FCB371;
   font-weight: 700;
-  margin-bottom: 2rem;
+  text-transform: uppercase;
 }
 .about img {
   margin-bottom: 1.5rem;
 }
 .about span {
   font-weight: 600;
+}
+.about button {
+  margin-top: 1.6rem;
+  min-width: 200px;
 }
